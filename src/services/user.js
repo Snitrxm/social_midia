@@ -6,7 +6,8 @@ const UserService = {
     login: async (params) => {
         const response = await Api.post('user/login', params);
         localStorage.setItem('user', JSON.stringify(response.data));
-    }
+    },
+    delete: (params) => Api.delete('user/delete', params),
 }
 
 export default UserService; 

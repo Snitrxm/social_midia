@@ -1,0 +1,7 @@
+.round{
+    border-radius: 50%;
+}
+
+.transition{
+    transition: 2.s;
+}

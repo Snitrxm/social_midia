@@ -4,7 +4,8 @@ import RegisterScreen from './screens/registerScreen/index';
 import LoginScreen from './screens/loginScreen';
 import MainScreen from './screens/mainScreen';
 import MainLoggedScreen from './screens/mainLoggedScreen';
-import UserConfigScreen from './screens/userConfig';
+import UserScreen from './screens/userScreen';
+import EditProfile from './screens/editProfile';
 
 const RouterFile = () => {
     return (
@@ -14,7 +15,8 @@ const RouterFile = () => {
                 <Route path="register" exact element={<RegisterScreen />} />
                 <Route path='login' element={<LoginScreen/>}/>
                 <Route path='home' element={<PrivateRouter children={<MainLoggedScreen/>}/>}/>
-                <Route path='config' element={<PrivateRouter children={<UserConfigScreen/>}/>}/>
+                <Route path='user/:id' element={<UserScreen/>}/>
+                <Route path='user/edit/:id' element={<PrivateRouter children={<EditProfile/>}/>}/>
             </Routes>
         </BrowserRouter>
     );

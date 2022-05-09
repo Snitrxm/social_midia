@@ -7,6 +7,7 @@ import { Navigate } from 'react-router-dom';
 
 const RegisterForm = () => {
     const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [redirectToLogin, setRedirectToLogin] = useState(false);
@@ -16,7 +17,7 @@ const RegisterForm = () => {
         e.preventDefault();
         
         try {
-            await UserService.register({name: name, email: email, password: password})
+            await UserService.register({name: name, username: username, email: email, password: password})
             setRedirectToLogin(true);
         } catch (error){
             console.log(error);
@@ -34,7 +35,13 @@ const RegisterForm = () => {
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                     Name
                     </label>
-                    <input value={name} onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Name" name='username'/>
+                    <input value={name} onChange={e => setName(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name" name='username'/>
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Username
+                    </label>
+                    <input value={username} onChange={e => setUsername(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" name='username'/>
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" >
