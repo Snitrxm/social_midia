@@ -15,8 +15,8 @@ const RouterFile = () => {
                 <Route path="register" exact element={<RegisterScreen />} />
                 <Route path='login' element={<LoginScreen/>}/>
                 <Route path='home' element={<PrivateRouter children={<MainLoggedScreen/>}/>}/>
-                <Route path='user/:id' element={<UserScreen/>}/>
-                <Route path='user/edit/:id' element={<PrivateRouter children={<EditProfile/>}/>}/>
+                <Route path='user/:username' element={<UserScreen/>}/>
+                <Route path='user/edit/:username' element={<PrivateRouter children={<EditProfile/>}/>}/>
             </Routes>
         </BrowserRouter>
     );

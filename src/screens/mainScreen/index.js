@@ -2,6 +2,12 @@ import { useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 
 const MainScreen = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if(user){
+        return <Navigate to={`/home`} />
+    }
+
     return (
         <div className="flex justify-center h-screen items-center">
             <div className="bg-transparent h-80 w-60 rounded-lg border-solid border-2 shadow">
