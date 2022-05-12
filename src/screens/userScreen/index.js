@@ -17,8 +17,9 @@ const UserScreen = () => {
     const [bio, setBio] = useState('');
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
-    const [followers, setFollowers] = useState(0);
     const [id, setId] = useState('');
+    const [followers, setFollowers] = useState('');
+    const [followersList, setFollowersList] = useState([]);
     const user = JSON.parse(localStorage.getItem('user'));
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December" ];
@@ -36,6 +37,9 @@ const UserScreen = () => {
             const year = date.getFullYear();
             setMonth(month)
             setYear(year)
+            setFollowers(response.data.followers);
+            setBio(response.data.bio);
+            setFollowersList(response.data.followersList);
         } catch(error){
             console.log(error);
         }
@@ -43,17 +47,21 @@ const UserScreen = () => {
 
     useEffect(() => {
         finder();
-    },[]);
+    },[username, followersList]);
+
+    const handleFollow = async () => {
+        await UserService.addFollower(username);
+        if(followersList.includes(user.user._id)){
+
+        } else{
+            setFollowers(past => past + 1);
+        }
+    }
      
     
-    const handleFollow = async () => {
-        setFollowers(past => past + 1);
-        const t = await UserService.addFollower(id)
-        console.log(t);
+    
 
-    }
-
-    if(user && user.username === username){
+    if(user && user.user.username === username){
         return (
             <Fragment>
                 <Header></Header>
@@ -68,7 +76,7 @@ const UserScreen = () => {
                                 </div>
                             </div>
                             <div>
-                                <Link to={`/user/edit/${user.username}`}><button className="border border-black bg-transparent font-bold p-1 rounded-lg transition hover:bg-gray-200">Edit Profile</button></Link>
+                                <Link to={`/user/edit/${user.user.username}`}><button className="border border-black bg-transparent font-bold p-1 rounded-lg transition hover:bg-gray-200">Edit Profile</button></Link>
                             </div>
                         </div>
                         <div>
@@ -104,7 +112,8 @@ const UserScreen = () => {
                             {bio ? <p className="">{bio}</p> : null}
                             <p className="font-light text-sm"><span className="font-bold text-1xl">{followers}</span> Followers</p>
                             <p className="font-light text-1xl">Joined {month} {year}</p>
-                            <button onClick={handleFollow} className="border border-black bg-transparent font-bold p-1 rounded-lg transition hover:bg-gray-200">Follow</button>
+                            {followersList.includes(user.user._id) ? <button className="border border-black bg-transparent font-bold p-1 rounded-lg transition hover:bg-gray-200">Unfollow</button> : <button onClick={handleFollow} className="border border-black bg-transparent font-bold p-1 rounded-lg transition hover:bg-gray-200">Follow</button>}
+                            
                         </div>
                     </div>
                 </main>

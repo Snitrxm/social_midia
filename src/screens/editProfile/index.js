@@ -14,20 +14,20 @@ const EditProfile = () => {
         e.preventDefault();
         try {
             if(newName !== ''){
-                await UserService.update(user._id, {newName: newName});
+                await UserService.update(user.user._id, {newName: newName});
                 setRedirectBack(true);
-                user.name = newName;
+                user.user.name = newName;
                 localStorage.setItem('user', JSON.stringify(user));
             }
             if(bio !== ''){
-                await UserService.update(user._id, {bio: bio});
+                await UserService.update(user.user._id, {bio: bio});
                 setRedirectBack(true);
-                user.bio = bio;
+                user.user.bio = bio;
                 localStorage.setItem('user', JSON.stringify(user));
             }
             if(bornYear !== ''){
-                await UserService.update(user._id, {bornyear: bornYear});
-                user.bornyear = bornYear;
+                await UserService.update(user.user._id, {bornyear: bornYear});
+                user.user.bornyear = bornYear;
                 setRedirectBack(true);
                 localStorage.setItem('user', JSON.stringify(user));
             }
@@ -37,15 +37,15 @@ const EditProfile = () => {
     }
 
     const handleDeleteBio = async () => {
-        await UserService.deleteBio(user._id); 
-        user.bio = '';
+        await UserService.deleteBio(user.user._id); 
+        user.user.bio = '';
         localStorage.setItem('user', JSON.stringify(user));
         setRedirectBack(true);
         
     }
 
     if(redirectBack){
-        return <Navigate to={`/user/${user.username}`} />
+        return <Navigate to={`/user/${user.user.username}`} />
     }
 
     return (
@@ -63,20 +63,20 @@ const EditProfile = () => {
                         Bio
                         </label>
                         <input value={bio} onChange={e => setBio(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Bio"/>
-                        {user.bio !== '' ? <button onClick={handleDeleteBio} className="border p-1.5 mt-4 font-bold rounded bg-red-500 text-white transition hover:bg-transparent text-black border-red-500">Delete Bio</button> : null}  
+                        {user.user.bio !== '' ? <button onClick={handleDeleteBio} className="border p-1.5 mt-4 font-bold rounded bg-red-500 text-white transition hover:bg-transparent text-black border-red-500">Delete Bio</button> : null}  
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
                         Born Year
                         </label>
                         <input value={bornYear} onChange={e => setBornYear(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="date" placeholder="Born Year"/>
-                        {user.bornyear !== '' ? <button className="border p-1.5 mt-4 font-bold rounded bg-red-500 text-white transition hover:bg-transparent text-black border-red-500">Delete Bio</button> : null}
+                        {user.user.bornyear !== null ? <button className="border p-1.5 mt-4 font-bold rounded bg-red-500 text-white transition hover:bg-transparent text-black border-red-500">Delete Bio</button> : null}
                     </div>
                     <div className="flex items-center justify-between">
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Update
                         </button>
-                        <Link to={`/user/${user.username}`}>
+                        <Link to={`/user/${user.user.username}`}>
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                             Cancel
                             </button>

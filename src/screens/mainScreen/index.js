@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 
 const MainScreen = () => {

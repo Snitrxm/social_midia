@@ -1,4 +1,6 @@
 import Api from'./api'
+const user = JSON.parse(localStorage.getItem('user'));
+
 
 
 const UserService = {
@@ -11,7 +13,13 @@ const UserService = {
     findOne: (username) => Api.post(`user/finder/${username}`),
     update: (id,params) => Api.put(`user/update/${id}`, params),
     deleteBio: (id) => Api.delete(`user/deletebio/${id}`),
-    addFollower: (id) => Api.post(`user/follow/${id}`),
+    addFollower: (username) => {
+        const token = user.token;
+        Api.put(`user/follow/${username}`,{}, {headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': `${token}`
+        }})
+    },
 }
 
 export default UserService; 

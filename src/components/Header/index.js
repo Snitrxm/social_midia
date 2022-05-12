@@ -14,7 +14,7 @@ const Header = () => {
                 <Link to='/home'><a>{<AiOutlineHome className='text-white text-3xl cursor-pointer hover:text-gray-200'/>}</a></Link>
             </div>
             <div className='mr-10 flex'>
-                <Link to={`/user/${user.username}`}><a>{<CgProfile className='mr-8 text-white text-3xl cursor-pointer hover:text-gray-200'/>}</a></Link>
+                <Link to={`/user/${user.user.username}`}><a>{<CgProfile className='mr-8 text-white text-3xl cursor-pointer hover:text-gray-200'/>}</a></Link>
                 <Link to=''><a>{<BsGear className='mr-10 text-white text-3xl cursor-pointer hover:text-gray-200'/>}</a></Link>
                 <input className='rounded pl-3 w-100 focus:outline-none input' placeholder='Search Snitter'></input>
             </div>
